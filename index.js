@@ -96,24 +96,39 @@ class Car {
   fill(gallons) {
     return (this.tank = this.tank + gallons);
   }
-  drive(distance) {
-    this.odometer = this.odometer + distance;
-    this.tank = this.tank - this.odometer;
-    if (this.tank < 1) {
-      console.log(`I ran out of fuel at ${this.odometer} miles`);
+  drive(dist) {
+    const drivableMiles = this.tank * this.milesPerGallon;
+    if (dist <= drivableMiles) {
+      this.odometer = this.odometer + dist;
+      this.tank = this.tank - dist / this.milesPerGallon;
+    } else {
+      this.odometer = this.odometer + drivableMiles;
       this.tank = 0;
+      return `I ranout of fuel at ${this.odometer} miles`;
     }
+    // this.odometer = this.odometer + miles;
+    // this.tank = this.tank - this.odometer;
+    // this.milesPerGallon = this.milesPerGallon - this.odometer;
+    // if (this.tank < 1) {
+    //   console.log(`I ran out of fuel at ${this.odometer} miles`);
+    //   this.tank = 0;
+    // }
+    // this.odometer = this.odometer + miles;
+    // this.tank = this.milesPerGallon / miles - this.tank;
+    // if (this.tank === 0) {
+    //   return `I ran out of fuel at ${this.odometer} miles`;
+    // }
   }
 }
 
-const car1 = new Car("BMW", 100);
-console.log(car1);
-car1.fill(35);
-console.log(car1);
-car1.drive(10);
-console.log(car1);
-car1.drive(50);
-console.log(car1);
+// const car1 = new Car("BMW", 20);
+// console.log(car1);
+// car1.fill(5);
+// console.log(car1);
+// car1.drive(3);
+// console.log(car1);
+// car1.drive(50);
+// console.log(car1);
 
 /*
   TASK 3
